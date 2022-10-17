@@ -1,0 +1,8 @@
+name: 'client'
+description: 'my client project. inspired by discord.py http client.'
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  http: ^0.13.5
