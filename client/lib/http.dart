@@ -71,18 +71,18 @@ class HTTPClient {
         } else if (response.statusCode >= 500) {
           throw InternalServerError('Server Error');
         } else {
-          throw Exception('Unknown Error');
+          throw HTTPException('Unknown Error');
         }
       } catch (e) {
         if (tries < 4) {
           Future.delayed(const Duration(seconds: 2)); // wait 2 seconds
           continue; // try again
         } else {
-          throw Exception('HTTP Error');
+          throw HTTPException('HTTP Error');
         }
       }
     }
-    return null; // return null if error
+    throw RuntimeError('HTTP Error');
   }
 
   void close() {

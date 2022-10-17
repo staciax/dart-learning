@@ -26,3 +26,7 @@ class Unauthorized extends HTTPException {
 class TooManyRequests extends HTTPException {
   TooManyRequests(String message) : super(message);
 }
+
+class RuntimeError extends HTTPException {
+  RuntimeError(String message) : super(message);
+}
