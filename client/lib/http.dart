@@ -1,9 +1,12 @@
 import 'package:http/http.dart' as http;
+import 'package:logging/logging.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'errors.dart';
 
 // http client inspired by https://github.com/Rapptz/discord.py
+
+final _log = new Logger('HTTPClient');
 
 Map _toJson(http.Response response) {
   // convert response to json
@@ -52,8 +55,12 @@ class HTTPClient {
           throw Exception('Invalid Method');
         }
 
+        _log.fine(
+            '$method $uri with $body has returned ${response.statusCode}');
+
         // status handling
         if (response.statusCode >= 200) {
+          _log.fine('${method} $uri has received ${response.statusCode}');
           return _toJson(response); // return json
         } else if (response.statusCode == 400) {
           throw BadRequest('Bad Request');
